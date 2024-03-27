@@ -11,6 +11,22 @@ export default function TextForm() {
         setText(newText);
     }
 
+    const handleClearClick = () => {
+        let newText = '';
+        setText(newText);
+    }
+
+    const handleCopy = () => {
+        let text = document.getElementById("myTextArea");
+        text.select();
+        navigator.clipboard.writeText(text.value);
+    }
+
+    const handleExtraSpaces = () =>{
+        let newText = text.split(/[ ]+/);
+        setText(newText.join(" "));
+    }
+
     const handleOnChange = (event) => {
         setText(event.target.value)
     }
@@ -20,9 +36,12 @@ export default function TextForm() {
         <>
             <div className="mt-5 container">
                 <h3>Enter the text to analyze below...</h3>
-                <textarea className="mb-4 form-control" value={text} onChange={handleOnChange} id="exampleFormControlTextarea1" rows="10"></textarea>
+                <textarea className="mb-4 form-control" value={text} onChange={handleOnChange} id="myTextArea" rows="10"></textarea>
                 <button className="btn btn-primary mx-2" onClick={handleUpClick}> Convert to Uppercase</button>
                 <button className="btn btn-primary mx-2" onClick={handleLowClick}> Convert to Lowercase</button>
+                <button className="btn btn-primary mx-2" onClick={handleClearClick}> Clear Text</button>
+                <button className="btn btn-primary mx-2" onClick={handleCopy}> Copy Text</button>
+                <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>Remove Extra Spaces</button>
             </div>
             <div className="mt-2 container">
                 <h4>Your Text Summary ...</h4>
